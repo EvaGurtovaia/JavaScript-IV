@@ -7,33 +7,57 @@ Prototype Refactor
 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 */
-function GameObject(attributes) {
-    this.createdAt= attributes.createdAt;
-    this.dimensions = attributes.dimensions;
-  }
-  GameObject.prototype.destroy = function() {return 'Object was removed from the game.'
-  };
+//function GameObject(attributes) {
+ //   this.createdAt= attributes.createdAt;
+  //  this.dimensions = attributes.dimensions;
+ // }
+  //GameObject.prototype.destroy = function() {return 'Object was removed from the game.'
+  //};
 
-  function CharacterStats(newAttributes){
-    GameObject.call (this, newAttributes);
-    this.healthPoints = newAttributes.healthPoints;
+  class GameObject {
+    constructor(attributes) {
+      this.createdAt= attributes.createdAt;
+      this.dimensions = attributes.dimensions;  
+    }
+    destroy() {return 'Object was removed from the game.'};
+  }
+
+  //function CharacterStats(newAttributes){
+   // GameObject.call (this, newAttributes);
+   // this.healthPoints = newAttributes.healthPoints;
+    //this.name = newAttributes.name;
+  //}
+   // CharacterStats.prototype = Object.create(GameObject.prototype);
+    //CharacterStats.prototype.takeDamage = function() {return `${this.name} took damage.`};
+  
+  class CharacterStats extends GameObject{
+    constructor(newAttributes) {
+      super(newAttributes);
+      this.healthPoints = newAttributes.healthPoints;
     this.name = newAttributes.name;
   }
-    CharacterStats.prototype = Object.create(GameObject.prototype);
-    CharacterStats.prototype.takeDamage = function() {return `${this.name} took damage.`};
+  takeDamage() {return `${this.name} took damage.`};
+  }
   
+   //function Humanoid(freshAttributes){
+    //CharacterStats.call (this, freshAttributes);
+    //this.team = freshAttributes.team;
+    //this.weapons = freshAttributes.weapons;
+    //this.language = freshAttributes.language;
+   //}
   
-  
-   function Humanoid(freshAttributes){
-    CharacterStats.call (this, freshAttributes);
-    this.team = freshAttributes.team;
-    this.weapons = freshAttributes.weapons;
-    this.language = freshAttributes.language;
-   }
-  
-    Humanoid.prototype = Object.create(CharacterStats.prototype);
-    CharacterStats.prototype.greet = function() {return `${this.name} offers a greeting in ${this.language}.`};
-  
+    //Humanoid.prototype = Object.create(CharacterStats.prototype);
+    //CharacterStats.prototype.greet = function() {return `${this.name} offers a greeting in ${this.language}.`};
+    
+    class Humanoid extends CharacterStats{
+      constructor(freshAttributes) {
+        super(freshAttributes);
+        this.team = freshAttributes.team;
+        this.weapons = freshAttributes.weapons;
+        this.language = freshAttributes.language;
+    }
+    greet() {return `${this.name} offers a greeting in ${this.language}.`};
+    }
   
     const mage = new Humanoid({
       createdAt: new Date(),
