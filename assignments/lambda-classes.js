@@ -22,7 +22,7 @@
       this.location = personAttributes.location;  
       this.gender = personAttributes.gender;  
     }
-    speak() {return ` Hello, my name is ${this.name}, I am from ${this.location}.`};
+    speak() {console.log ` Hello, my name is ${this.name}, I am from ${this.location}.`};
   }
  
  // Instructor
@@ -43,8 +43,8 @@
       this.favLanguage = instructorAttributes.favLanguage;
       this.catchPhrase = instructorAttributes.catchPhrase;
   }
-  demo() {console.log (`Today we are learning about ${subject}`);};
-  grade() {console.log (`${student.name} receives a perfect score on ${subject}`);};
+  demo(subject) {console.log (`Today we are learning about ${subject}`);};
+  grade(student, subject) {console.log (`${student.name} receives a perfect score on ${subject}`);};
   }
   
   
@@ -66,9 +66,10 @@
       this.className  = studentAttributes.className;
       this.favSubjects = studentAttributes.favSubjects;
   }
-  listSubjects
-  PRAssignment() {console.log (`${student.name} has submitted a PR for ${subject}`);}
-  sprintChallenge() {console.log (`${student.name} has begun sprint challenge on ${subject}`);};
+  listSubjects()  {console.log (`${this.name}'s Favorite subjects are: ${this.favSubjects.join(',')}`);}
+  PRAssignment(subject) {console.log (`${student.name} has submitted a PR for ${subject}`);}
+  sprintChallenge(){console.log(`${student.name} has begun sprint challenge on {subject}`);
+  }
   }
 
   //Project Manager
@@ -80,49 +81,90 @@
   //ProjectManagers have the following Methods:
   //standUp a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
   //debugsCode a method that takes in a student object and a subject and logs out {name} debugs {student.name}'s code on {subject}
-  class Project Manager extends Instructors{
+  class ProjectManager extends Instructor{
     constructor(pmAttributes) {
-      super(pmtAttributes);
+      super(pmAttributes);
       this.gradClassName  = pmAttributes.gradClassName;
       this.favInstructor  = pmAttributes.favInstructor;
   }
+  standUp(channel){console.log (`${this.name} announces to ${channel}, @channel standy times!​​​​​`);
+  }
 
-  const Fred = new Person({
+  debugsCode(student, subject){
+    console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
+  }
+}
+  const fred = new Person({
   name: 'Fred',
   location: 'Bedrock',
   age: 37,
   gender: 'male',
-  favLanguage: 'JavaScript',
+  favLanguage: 'JavaScript', 
   specialty: 'Front-end',
   catchPhrase: `Don't forget the homies`
   });
   
-  const Chan = new Instructor({
+  const chan = new Instructor({
     name: 'Chan',
     location: 'Tampa',
     age: 31,
     gender: 'female',
     favLanguage: 'JavaScript, Python, Elm etc.',
     specialty: 'Redux',
-    catchPhrase: `Don't forget the homies`
+    catchPhrase: `I want to move to California`
     });
-    const Gav = new Student ({
+    const jina = new Instructor({
+      name: 'Jina',
+      location: 'San Diego',
+      age: 28,
+      gender: 'female',
+      favLanguage: 'Ruby',
+      specialty: 'Fullstack',
+      catchPhrase: `I love mango`
+  });
+    const gav = new Student ({
     name: 'Gav',
     location: 'Iowa city',
     age: 27,
     gender: 'male',
     className: 'CS132',
     previousBackground: 'Pizza maker',
-    favLanguage: ['Html', 'CSS', 'JavaScript.'],
+    favSubjects: ['Html', 'CSS', 'JavaScript.'],
     specialty: 'Redux',
     catchPhrase: `Don't forget the homies`  
     });
-    const Alisom = new ProjectManager ({
+    
+    const bob = new Student({
+      name: 'Bob',
+      location: 'Boston',
+      age: 58,
+      gender: 'female',
+      favSubjects: ['Ruby', 'Python'],
+  });
+  
+  const shawn = new ProjectManager({
+      name: 'Shawn',
+      location: 'NY',
+      age: 62,
+      gender: 'female',
+      gradClassName: 'CS1'
+  });
+    const alison = new ProjectManager ({
         name: 'Alison',
         location: 'Chicago',
         age: 32,
         gender: 'female',
         gradClassName: 'CS1',
         favInstructor: 'Sean',
-        favLanguage: 'Html, CSS, JavaScript.',
+        favSubjects: ['Html', 'CSS', 'JavaScript']
         });
+console.log(fred.speak());
+console.log(bob.listSubjects());
+console.log(shawn.gender);
+console.log(alison.debugsCode(gav, 'Python'));
+console.log(shawn.standUp('WEBPT4'));
+console.log(bob.sprintChallenge('Preprocessing-II'));
+console.log(jina.demo('GitHub'));
+console.log(gav.PRAssignment('Responsive Design'));
+console.log(chan.catchPhrase);
+
