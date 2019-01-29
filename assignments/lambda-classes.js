@@ -67,8 +67,8 @@
       this.favSubjects = studentAttributes.favSubjects;
   }
   listSubjects()  {console.log (`${this.name}'s Favorite subjects are: ${this.favSubjects.join(',')}`);}
-  PRAssignment(subject) {console.log (`${student.name} has submitted a PR for ${subject}`);}
-  sprintChallenge(){console.log(`${student.name} has begun sprint challenge on {subject}`);
+  PRAssignment(subject) {console.log (`${this.name} has submitted a PR for ${subject}`);}
+  sprintChallenge(subject){console.log(`${this.name} has begun sprint challenge on ${subject}`);
   }
   }
 
